@@ -1,19 +1,24 @@
 from flask import Flask
-from flask import request
+from flask import request, render_template
 from flask import make_response
 import json
 import time
 import random
 
+
+from flask import Flask
+from flask_bootstrap import Bootstrap
+
+
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
+
+bootstrap = Bootstrap(app)
 
 
 @app.route('/')
 def respond_to_index():
-    response = make_response("Hi this is a random number " + str(random.randint(0,1000)), 200)
-    response.headers['Access-Control-Allow-Origin']= '*'
-    return response
+    return render_template("index.html")
 
 
 @app.route('/', methods=['POST'])
